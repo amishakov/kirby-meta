@@ -20,7 +20,7 @@ App::plugin('fabianmichael/meta', [
         'social' => true,
 
         'robots' => true,
-        'robots.index' => null,
+        'robots.index' => true,
         'robots.canonical' => true,
         'robots.follow' => true,
         'robots.archive' => true,
@@ -29,13 +29,14 @@ App::plugin('fabianmichael/meta', [
         'robots.translate' => true,
         'robots.forceNoIndex' => false,
 
-        'darkvisitors.token' => null,
-        'darkvisitors.agentTypes' => ['AI Data Scraper'],
-
         'title.separators' => ['~' , '-' , '–' , '—' , ':' , '/' , '⋆' , '·' , '•' , '~' , '×' , '*' , '‣', '→', '←', '<' , '>' , '«' , '»' , '‹' , '›', '♠︎', '♣︎', '♥︎', '♦︎', '☙', '❦', '❧', '☭'],
         'theme.color' => null,
 
         'panel.view.filter' => null,
+
+        // DarkVisitors API integration (https://darkvisitors.com/)
+        'darkvisitors.token' => null,
+        'darkvisitors.agentTypes' => ['AI Data Scraper'],
     ],
 
     'api' => require __DIR__ . '/config/api.php',
