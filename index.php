@@ -29,7 +29,7 @@ App::plugin('fabianmichael/meta', [
         'robots.translate' => true,
         'robots.forceNoIndex' => false,
 
-        'title.separators' => ['~' , '-' , '–' , '—' , ':' , '/' , '⋆' , '·' , '•' , '~' , '×' , '*' , '‣', '→', '←', '<' , '>' , '«' , '»' , '‹' , '›', '♠︎', '♣︎', '♥︎', '♦︎', '☙', '❦', '❧', '☭'],
+        'title.separator' => '|',
         'theme.color' => null,
 
         'panel.view.filter' => null,
