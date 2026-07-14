@@ -62,7 +62,7 @@
         <template v-for="(page, id) in pages" >
           <tr
             :key="id + '_head'"
-            :data-is-indexible="page.is_indexible"
+            :data-is-indexable="page.is_indexable"
           >
             <th colspan="8" class="k-meta-page-header-col">
               <div class="k-meta-page-header">
@@ -83,7 +83,7 @@
           </tr>
           <tr
             :key="id + '_content'"
-            :data-is-indexible="page.is_indexible"
+            :data-is-indexable="page.is_indexable"
           >
             <td>
               <div v-if="page.meta_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_title }}</div>
@@ -118,7 +118,7 @@
             </td>
             <td style="text-align: center;">
               <k-icon
-                :type="page.is_indexible ? 'meta-true' : 'meta-false'"
+                :type="page.is_indexable ? 'meta-true' : 'meta-false'"
                 style="margin-inline: auto;"
               />
             </td>
@@ -246,11 +246,11 @@ export default {
   background: var(--color-background);
 }
 
-.k-meta tbody tr:not([data-is-indexible="true"]) {
+.k-meta tbody tr:not([data-is-indexable="true"]) {
   color: var(--color-gray-600);
 }
 
-.k-meta tbody tr:not([data-is-indexible="true"]) .k-image {
+.k-meta tbody tr:not([data-is-indexable="true"]) .k-image {
   opacity: .8;
 }
 
