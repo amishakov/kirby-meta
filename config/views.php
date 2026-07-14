@@ -1,7 +1,7 @@
 <?php
 
-use FabianMichael\Meta\Sitemap;
 use Kirby\Cms\Url;
+use Kirby\Panel\Ui\Buttons\LanguagesDropdown;
 
 return [
     [
@@ -18,7 +18,7 @@ return [
             foreach ($index as $page) {
                 $meta = $page->meta();
 
-                if ($og_image = $meta->og_image()) {
+                if ($og_image = $meta->ogImage()) {
                     if ($og_image->exists() === true) {
                         // Only resize, if given image does actually exists
                         // and is accessible
@@ -33,21 +33,20 @@ return [
 
                 $pages[] = [
                     'title' => $page->title()->value(),
-                    'meta_title' => $meta->get('meta_title')->value(),
+                    'meta_title' => $meta->get('meta_title')?->value(),
                     'icon'  => $page->blueprint()->icon(),
-                    'is_indexible' => Sitemap::isPageIndexible($page),
                     'status'  => $page->status(),
                     'id' => $page->id(),
                     'url' => $page->url(),
                     'shortUrl' => Url::short($page->url()),
                     'template' => $page->template()->name(),
                     'panelUrl' => $page->panel()->url(),
-                    'meta_description' => $meta->meta_description()->value(),
-                    'robots' => $meta->robots(),
-                    'og_title' => $meta->og_title()->value(),
-                    'og_description' => $meta->get('og_description', true, false)->value(),
+                    'meta_description' => $meta->description(),
+                    'is_indexable' => $page->isIndexable(),
+                    'og_title' => $meta->ogTitle(),
+                    'og_description' => $meta->get('og_description', true, false)?->value(),
                     'og_image_url' => $og_image_url,
-                    'og_image_alt' => $og_image?->alt()->value(),
+                    'og_image_alt' => $og_image?->alt()?->value(),
                 ];
             }
 
@@ -55,6 +54,9 @@ return [
                 'component' => 'k-meta-view',
                 'props' => [
                     'pages' => $pages,
+                    'buttons' => [
+                        'languages' => fn () => new LanguagesDropdown(site()),
+                    ]
                 ],
             ];
         },

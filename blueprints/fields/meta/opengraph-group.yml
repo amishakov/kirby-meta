@@ -6,14 +6,14 @@ fields:
     numbered: false
     help: fabianmichael.meta.og.help
   og_title:
-    type: text
+    type: meta-text
     label: fabianmichael.meta.og_title.label
-    placeholder: "{{ page.meta_title.or(page.title) }}"
+    placeholder: "{{ page.meta.ogTitle(true, false, false) }}"
     help: fabianmichael.meta.og_title.help
   og_description:
-    type: text
+    type: meta-text
     label: fabianmichael.meta.og_description.label
-    placeholder: "{{ page.meta_description.or(site.meta_description) }}"
+    placeholder: "{{ page.meta.ogDescription(true, true, false, false) }}"
     help: fabianmichael.meta.og_description.help
   og_image:
     extends: fields/meta/og-image

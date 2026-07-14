@@ -1,11 +1,12 @@
 <template>
-  <div class="k-meta-sharing-preview">
+  <k-section class="k-meta-sharing-preview">
     <div class="k-meta-sharing-preview__label k-field-label">
       <k-icon type="share"/>
-      <span>{{ headline }}</span>
+      <k-label>{{ label }}</k-label>
     </div>
     <div class="k-meta-sharing-preview__box">
       <div
+        v-if="og_image"
         class="k-meta-sharing-preview__image-container"
         :data-image-missing="!og_image"
         :data-image-missing-text="$t('fabianmichael.meta.og_image.missing')"
@@ -21,7 +22,7 @@
         >{{ og_image_source }}</span>
       </div>
       <div class="k-meta-sharing-preview__content-container">
-        <span class="k-meta-sharing-preview__site-name">{{ site_name }}</span>
+        <span class="k-meta-sharing-preview__site-name">{{ og_site_name }}</span>
         <h2 class="k-meta-sharing-preview__preview-headline">
           {{ title }}
         </h2>
@@ -30,7 +31,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </k-section>
 </template>
 
 <script>
@@ -46,59 +47,61 @@ export default {
   },
   data() {
     return {
-      headline: "Basic Meta Information",
-      metadata_og_image: null,
-      metadata_og_image_field: null,
-      page_is_homepage: null,
-      page_title: null,
-      page_metadata_description: null,
-      site_meta_description: null,
-      site_name: null,
-      site_og_image: null,
-      site_title: null,
-      title_separator: null,
-      url: null,
-      og_title_prefix: null,
+      label: "Basic Meta Information",
 
-      og_image: null,
+      is_homepage: null,
+      title_separator: null,
+
+      override_og_title: null,
+      override_og_description: null,
+      override_og_image: null,
+
+      default_og_title: null,
+      default_og_description: null,
+      default_og_image: null,
+
+      site_og_description: null,
+      og_site_name: null,
+      site_og_image: null,
+
+      // computed values
       og_image_source: null,
+      og_image: null,
     };
   },
   async created() {
     const response = await this.load();
 
-    this.headline = response.headline;
-    this.metadata_og_image = response.metadata_og_image;
-    this.metadata_og_image_field = response.metadata_og_image_field;
-    this.page_is_homepage = response.page_is_homepage;
-    this.page_title = response.page_title;
-    this.page_metadata_description = response.page_metadata_description;
-    this.site_meta_description = response.site_meta_description;
-    this.site_name = response.site_name;
-    this.site_og_image = response.site_og_image;
-    this.site_title = response.site_title;
+    this.label = response.label;
+
+    this.is_homepage = response.is_homepage;
     this.title_separator = response.title_separator;
-    this.og_title_prefix = response.og_title_prefix;
-    this.url = response.url;
+
+    this.override_og_title = response.override_og_title;
+    this.override_og_description = response.override_og_description;
+    this.override_og_image = response.override_og_image;
+
+    this.default_og_title = response.default_og_title;
+    this.default_og_description = response.default_og_description;
+    this.default_og_image = response.default_og_image;
+
+    this.site_og_description = response.site_og_description;
+    this.og_site_name = response.og_site_name;
+    this.site_og_image = response.site_og_image;
 
     this.updateOgImage();
   },
   computed: {
     title() {
-      const { og_title, meta_title } = this.$store.getters["content/values"]();
-      const prefix = this.og_title_prefix || "";
-      const title = this.page_is_homepage
-        ? (og_title || meta_title || this.site_name)
-        : (og_title || meta_title || this.page_title);
-
-      return prefix + title;
+      const { title, og_title, meta_title } = this.$panel.content.version('changes');
+      return (this.override_og_title || og_title || meta_title || title)
     },
     description() {
-      const { og_description, meta_description } = this.$store.getters["content/values"]();
-      return og_description || meta_description || this.page_metadata_description || this.site_meta_description || this.$t("fabianmichael.meta.description_missing");
+      const { og_description, meta_description } = this.$panel.content.version('changes');
+      return this.override_og_description || og_description || meta_description || this.site_og_description || this.$t("fabianmichael.meta.description_missing");
     },
     store_image() {
-      return this.$store.getters["content/values"]().og_image;
+      return this.$panel.content.version('changes').og_image;
     },
   },
   watch: {
@@ -114,24 +117,30 @@ export default {
       return this.$api.get(this.parent + "/sections/" + this.name);
     },
     updateOgImage() {
-      if (this.store_image.length > 0) {
+      if (this.override_og_image !== null) {
+        this.og_image = this.og_image_override.url;
+        this.og_image_source = this.$t("fabianmichael.meta.source.override");
+      } else if (this.store_image.length > 0) {
         this.$api.files
           .get(
-            this.$store.getters["content/model"]().api,
+            this.parent,
             this.store_image[0].filename,
             { view: "compact", }
           ).then((response) => {
             this.og_image = response.url;
             this.og_image_source = this.$t("fabianmichael.meta.source.og_image");
           });
-      } else if (this.metadata_og_image !== null) {
-        this.og_image = this.metadata_og_image.url;
-        this.og_image_source = this.$t("fabianmichael.meta.source.metadata");
+      } else if (this.default_og_image !== null) {
+        console.log("default_og_image", this.default_og_image);
+        this.og_image = this.default_og_image.url;
+        this.og_image_source = this.$t("fabianmichael.meta.source.default");
       } else if (this.site_og_image !== null) {
-        this.og_image = this.site_og_image.url
+        console.log("site_og_image", this.site_og_image);
+        this.og_image = this.site_og_image.url;
         this.og_image_source = this.$t("fabianmichael.meta.source.site");
       } else {
         this.og_image = null;
+        this.og_image_source = null;
       }
     },
   },
@@ -142,6 +151,8 @@ export default {
 
 .k-meta-sharing-preview__label {
   display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-1);
 }
 
 .k-meta-sharing-preview__label > * + * {
@@ -150,10 +161,11 @@ export default {
 }
 
 .k-meta-sharing-preview__source-badge {
-  background: var(--color-gray-900);
-  color: var(--color-white);
-  border-radius: var(--rounded-sm);
+  background: var(--item-color-back);
+  color: inherit;
+  border-radius: var(--rounded);
   bottom: var(--spacing-2);
+  box-shadow: var(--item-shadow);
   position: absolute;
   right: var(--spacing-2);
   font-size: .625rem;
@@ -162,12 +174,11 @@ export default {
 }
 
 .k-meta-sharing-preview__box {
-  background: var(--color-white);
+  background: var(--item-color-back);
   border-radius: var(--rounded);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  max-width: 438px;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -200,11 +211,11 @@ export default {
 }
 
 .k-meta-sharing-preview__content-container {
-  padding: var(--spacing-2) var(--spacing-3) var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
 }
 
 .k-meta-sharing-preview__site-name {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-xs);
 }
 
@@ -215,7 +226,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-headline {
-  color: var(--color-dark);
+  color: var(--color-text);
   font-size: var(--text-base);
   line-height: var(--leading-tight);
   margin: var(--spacing-1) 0;
@@ -223,7 +234,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-paragraph {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   margin: 0;

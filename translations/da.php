@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadata (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadata & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Sidetitel',
     'fabianmichael.meta.title_preview.label' => 'Titel forhåndsvisning',
     'fabianmichael.meta.global_settings.headline' => ' Globale indstillinger',
@@ -15,7 +15,8 @@ return [
     'fabianmichael.meta.robots.headline' => 'Søgemaskiner',
     'fabianmichael.meta.robots.help' => 'Detaljerede instruktioner til hvordan søgemaskiner skal håndtere denne side.',
     'fabianmichael.meta.robots_index.label' => 'Indeksering',
-    'fabianmichael.meta.robots_index.help' => 'Søgemaskiner må indeksere denne side.',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Søgemaskiner må som standard indeksere listede sider, mens ulistede sider udelukkes. Denne indstilling kan bruges til at tilsidesætte standarden. Kladder vil aldrig være indekserbare.',
     'fabianmichael.meta.robots_follow.label' => 'Følg links',
     'fabianmichael.meta.robots_follow.help' => 'Søgemaskiner vil følge links på denne side.',
     'fabianmichael.meta.robots_archive.label' => 'Arkivering',
@@ -24,6 +25,8 @@ return [
     'fabianmichael.meta.robots_imageindex.help' => 'Søgemaskiner vil associere denne side med billedsøgeresultater.',
     'fabianmichael.meta.robots_snippet.label' => 'Uddrag',
     'fabianmichael.meta.robots_snippet.help' => 'Søgemaskiner vil vise beskrivelsesuddrag for denne side.',
+    'fabianmichael.meta.robots_translate.label' => 'Oversætte',
+    'fabianmichael.meta.robots_translate.help' => 'Søgemaskiner må oversætte denne side.',
 
     'fabianmichael.meta.global_robots.headline' => 'Søgemaskine indstillinger',
     'fabianmichael.meta.global_robots.help' => 'Detaljerede instruktioner til hvordan søgemaskiner skal håndtere sider på dette websted som standard. Sider kan have individuelle indstillinger for at tilsidesætte disse standarder.',
@@ -37,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help' => 'Søgemaskiner vil associere sider med billedsøgeresultater.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Uddrag',
     'fabianmichael.meta.global_robots_snippet.help' => 'Søgemaskiner vil vise beskrivelsesuddrag for sider.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Oversætte',
+    'fabianmichael.meta.global_robots_translate.help' => 'Søgemaskiner må oversætte sider på dette websted.',
 
     'fabianmichael.meta.description.label' => 'Beskrivelse',
     'fabianmichael.meta.description.help' => 'En kort beskrivelse af siden der vil blive vist under sidens titel af søgemaskiner.',
@@ -49,13 +54,13 @@ return [
     'fabianmichael.meta.state.off' => 'slukket',
     'fabianmichael.meta.state.unset' => 'ikke indstillet',
     'fabianmichael.meta.og.headline' => 'Deling på sociale medier',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Twitter) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Mastodon) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Del webstedets navn',
     'fabianmichael.meta.og_site_name.help' => 'Navnet der skal vises for hele webstedet til deling på sociale medier. Hvis ikke indstillet, vil webstedets titel blive brugt som fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Standard delingsbillede',
     'fabianmichael.meta.global_og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Dette globale billede bruges som fallback for sider der ikke har et dedikeret billede.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Delingsbillede',
-    'fabianmichael.meta.og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Det globale fallback-billede vil blive brugt som fallback.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Det globale fallback-billede vil blive brugt som fallback.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
     'fabianmichael.meta.og_title.label' => 'Delingstitel (tilsidesæt)',
     'fabianmichael.meta.og_title.help' => 'Sidens titel som den vil blive vist ved deling. Hvis ikke indstillet, vil både **Titel (Tilsidesæt)** og sidens titel blive brugt som fallback.',
     'fabianmichael.meta.og_description.label' => 'Delingsbeskrivelse',
@@ -77,19 +82,16 @@ return [
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Årligt',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Aldrig',
 
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter brugernavn for webstedet',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter brugernavn for indholdsopretter',
-
     'fabianmichael.meta.no_og_image_fallback' => 'Intet globalt fallback-billede defineret. Gå til <a href="{ link }">globale metadata indstillinger</a> og upload et.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Privatlivsmeddelelse',
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Ved at vælge en bruger vil du eksponere personlige oplysninger som e-mailadresse og profilbillede for søgemaskiner, andre webcrawler og alle der læser kildekoden på din hjemmeside.',
     'fabianmichael.meta.sharing_preview.headline' => 'Del forhåndsvisning',
     'fabianmichael.meta.description_missing' => '[Delingsbeskrivelse og fallback-beskrivelse mangler]',
+    'fabianmichael.meta.source.override' => 'Kilde: Programmatisk tilsidesat',
     'fabianmichael.meta.source.og_image' => 'Kilde: Delingsbillede',
-    'fabianmichael.meta.source.metadata' => 'Kilde: Side miniaturebillede',
-    'fabianmichael.meta.source.site' => 'Kilde: Fallback miniaturebillede',
+    'fabianmichael.meta.source.default' => 'Kilde: Side miniaturebillede',
+    'fabianmichael.meta.source.site' => 'Kilde: Globalt delingsbillede',
     'fabianmichael.meta.og_image.missing' => 'Billede mangler',
 
     'fabianmichael.meta.schema.headline' => 'Strukturerede data',
@@ -108,4 +110,18 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Søgemaskine synlighed',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Denne side indekseres af søgemaskiner og kan vises i søgeresultaterne',
     'fabianmichael.meta.search_engines.visibility.no' => 'Denne side er skjult fra søgeresultaterne',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadater',
+    'fabianmichael.meta.stealthMode.button' => 'Indexering deaktiveret!',
+    'fabianmichael.meta.stealthMode.close' => 'Luk',
+    'fabianmichael.meta.stealthMode.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-tilstand</h2>
+        <p>
+            Indexering af søgemaskiner er blevet deaktiveret via konfiguration.
+            Sider vil altid bede søgemaskiner om at indeksere dem via Meta-Tag.
+            Denne tilstand bruges til at forhindre søgemaskiner fra at indeksere et websted under udvikling eller test, uden at ændre de faktiske indstillinger via panelet.
+        </p>
+        <p>Ændre <code>fabianmichael.meta.stealthMode</code> i konfigurationen til <code>false</code> for at aktivere indexering igen.</p>',
+
+    'fabianmichael.meta.override.help' => 'Denne værdi er programmatisk tilsidesat og kan ikke ændres.',
 ];

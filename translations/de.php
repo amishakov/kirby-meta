@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadaten (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadaten & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Seitentitel',
     'fabianmichael.meta.title_preview.label' => 'Titel (Vorschau)',
     'fabianmichael.meta.global_settings.headline' => 'Globale Einstellungen',
@@ -14,8 +14,9 @@ return [
 
     'fabianmichael.meta.robots.headline' => 'Suchmaschinen',
     'fabianmichael.meta.robots.help' => 'Detaillierte Anweisungen, wie Suchmaschinen mit dieser Seite umgehen sollen.',
-    'fabianmichael.meta.robots_index.label' => 'Indizieren',
-    'fabianmichael.meta.robots_index.help' => 'Suchmaschinen werden diese Seite indizieren.',
+    'fabianmichael.meta.robots_index.label' => 'Indexieren',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Suchmaschinen dürfen standardmäßig gelistete Seiten indexieren, ungelistete Seiten hingegen nicht. Diese Einstellung kann genutzt werden, um das Standardverhalten zu überschreiben. Entwürfe sind niemals indexierbar.',
     'fabianmichael.meta.robots_follow.label' => 'Links folgen',
     'fabianmichael.meta.robots_follow.help' => 'Suchmaschinen werden Links auf dieser Seite folgen.',
     'fabianmichael.meta.robots_archive.label' => 'Archivierung',
@@ -24,11 +25,13 @@ return [
     'fabianmichael.meta.robots_imageindex.help' => 'Bilder auf dieser Seite erscheinen in der Bildsuche.',
     'fabianmichael.meta.robots_snippet.label' => 'Snippets',
     'fabianmichael.meta.robots_snippet.help' => 'Suchmaschinen dürfen Textschnipsel aus dieser Seite generieren.',
+    'fabianmichael.meta.robots_translate.label' => 'Übersetzung',
+    'fabianmichael.meta.robots_translate.help' => 'Suchmaschinen dürfen diese Seite übersetzen.',
 
     'fabianmichael.meta.global_robots.headline' => 'Suchmaschinen-Einstellungen',
-    'fabianmichael.meta.global_robots.help' => 'Standard-Einstellungen für Anweisungen an Suchmaschinen, in welcher Weise sie Seiten dieser Website indizieren dürfen. Seiten können individuelle Einstellungen verwenden, um dieses Verhaltern zu überschreiben.',
+    'fabianmichael.meta.global_robots.help' => 'Standard-Einstellungen für Anweisungen an Suchmaschinen, in welcher Weise sie Seiten dieser Website indexieren dürfen. Seiten können individuelle Einstellungen verwenden, um dieses Verhaltern zu überschreiben.',
     'fabianmichael.meta.global_robots_index.label' => 'Indexierung',
-    'fabianmichael.meta.global_robots_index.help' => 'Suchmaschinen werden diese Website indizieren.',
+    'fabianmichael.meta.global_robots_index.help' => 'Suchmaschinen dürfen diese Website indexieren. Diese globale Einstellung kann für einzelne Unterseiten überschrieben werden.',
     'fabianmichael.meta.global_robots_follow.label' => 'Links folgen',
     'fabianmichael.meta.global_robots_follow.help' => 'Suchmaschinen werden Verlinkungen auf dieser Website folgen.',
     'fabianmichael.meta.global_robots_archive.label' => 'Archivierung',
@@ -37,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help' => 'Bilder auf dieser Website erscheinen in der Bildsuche.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Snippets',
     'fabianmichael.meta.global_robots_snippet.help' => 'Suchmaschinen dürfen Textschnipsel aus dieser Website generieren.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Übersetzen',
+    'fabianmichael.meta.global_robots_translate.help' => 'Suchmaschinen dürfen Seiten auf dieser Website übersetzen.',
 
     'fabianmichael.meta.description.label' => 'Beschreibung',
     'fabianmichael.meta.description.help' => 'Eine kurze Beschreibung, die Suchmachinen in den Ergebnissen unterhalb des Seitentitels darstellen.',
@@ -44,7 +49,7 @@ return [
     'fabianmichael.meta.canonical_url.label' => 'Eindeutige URL',
     'fabianmichael.meta.canonical_url.help' => 'Eindeutige URL zu dieser Seite. Standardmäßig wird die normale URL verwendet, falls dieses Feld leer ist.',
     'fabianmichael.meta.global_default_value.label' => 'Global ({ state })',
-    'fabianmichael.meta.config_default_value.label' => 'Konfiguration ({ state })',
+    'fabianmichael.meta.config_default_value.label' => 'Standard ({ state })',
     'fabianmichael.meta.state.on' => 'ja',
     'fabianmichael.meta.state.off' => 'nein',
     'fabianmichael.meta.state.unset' => 'nicht gesetzt',
@@ -55,7 +60,7 @@ return [
     'fabianmichael.meta.global_og_image.label' => 'Standard Bild für Teilen',
     'fabianmichael.meta.global_og_image.help' => 'Ein Bild, welches diese Website beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Dieses Bild wird als Standard für Seiten verwendet, die kein eigenes Bild haben.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Erlaubte Formate:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Bild für Teilen',
-    'fabianmichael.meta.og_image.help' => 'Ein Bild, welches diese Seite beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Wenn kein Bild ausgewählt ist, wird das globale Standard-Bild verwendet.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Erlaubte Formate:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'Ein Bild, welches diese Seite beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Wenn kein Bild ausgewählt ist, wird das globale Standard-Bild verwendet.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Erlaubte Formate:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
 
     'fabianmichael.meta.og_title.label' => 'Gesonderter Titel für Teilen',
     'fabianmichael.meta.og_title.help' => 'Der Titel dieser Seite beim Teilen in sozialen Netzwerken. Verwendet **Title (überschreiben)** oder den Seitentitel als Alternativen.',
@@ -78,19 +83,16 @@ return [
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Jährlich',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Niemals',
 
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter-Benutzername der Website',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter-Benutzername des Authors',
-
     'fabianmichael.meta.no_og_image_fallback' => 'Kein globales "Teilen"-Bild definiert. Ein solches Bild sollte in den <a href="{ link }">globalen Einstellungen</a> hochgeladen werden.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Hinweis zum Datenschutz',
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Durch das Auswählen eines Benutzer*innen-Account werden private Informationen wie die E-Mailadresse und das Profilbild in mit Suchmaschinen und alllen Menschen und Bots, die den Quelltext der Website lesen geteilt.',
     'fabianmichael.meta.sharing_preview.headline' => 'Vorschau für Teilen',
     'fabianmichael.meta.description_missing' => '[Beschreibung für Teilen und globale Beschreibung fehlen]',
+    'fabianmichael.meta.source.override' => 'Quelle: Programmatisch überschrieben',
     'fabianmichael.meta.source.og_image' => 'Quelle: Bild für Teilen',
-    'fabianmichael.meta.source.metadata' => 'Quelle: Seiten-Thumbnail',
-    'fabianmichael.meta.source.site' => 'Quelle: globale Standard-Thumbnail',
+    'fabianmichael.meta.source.default' => 'Quelle: Standard-Thumbnail',
+    'fabianmichael.meta.source.site' => 'Quelle: Globales Standard-Thumbnail',
     'fabianmichael.meta.og_image.missing' => 'Bild fehlt',
 
     'fabianmichael.meta.schema.headline' => 'Strukturierte Daten',
@@ -107,6 +109,21 @@ return [
     'fabianmichael.meta.search_engines.visibility.visible' => 'Sichtbar',
     'fabianmichael.meta.search_engines.visibility.hidden' => 'Versteckt',
     'fabianmichael.meta.search_engines.visibility.label' => 'Sichtbarkeit in Suchmaschinen',
-    'fabianmichael.meta.search_engines.visibility.yes' => 'Diese Seite wird von Suchmaschinen indexizert und kann in Suchergebnissen erscheinen',
+    'fabianmichael.meta.search_engines.visibility.yes' => 'Diese Seite ist indexierbar und kann in Suchergebnissen erscheinen',
     'fabianmichael.meta.search_engines.visibility.no' => 'Diese Seite wird in den Suchergebnissen versteckt',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadaten',
+    'fabianmichael.meta.stealthMode.button' => 'Indexierung deaktiviert!',
+    'fabianmichael.meta.stealthMode.close' => 'Schließen',
+    'fabianmichael.meta.stealthMode.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-Modus</h2>
+        <p>
+            Indexierung durch Suchmaschinen wurde durch die Konfiguration deaktiviert.
+            Seiten werden immer Suchmaschinen dazu auffordern, sie nicht zu indexieren via Meta-Tag.
+            Dieser Modus wird verwendet, um Suchmaschinen während der Entwicklung oder Testphase
+            von der Indexierung auszuschließen, ohne tatsächliche Einstellungen über das Panel zu ändern.
+        </p>
+        <p>Ändere <code>fabianmichael.meta.stealthMode</code> in der Konfiguration auf <code>false</code> um die Indexierung wieder zu aktivieren.</p>',
+
+    'fabianmichael.meta.override.help' => 'Diese Einstellung wurde programmatisch gesetzt und kann für diese Seite nicht geändert werden.',
 ];
